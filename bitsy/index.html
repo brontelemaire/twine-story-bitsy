@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+Multi-Bitsy by Velvet, 2022
+Special thanks to the PangPangClub, khrasse and Guillaume Stagnaro
+-->
+
+<head>
+<meta charset="utf-8">
+<title>game page</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onkeydown="triggerControl(event)" onkeyup="triggerControl(event)" >
+<div class="container">
+<div class="stop-click"></div>
+
+<!-- This is where the bitsy games are put, inside of iframes -->
+ <div class='iframe-container'><iframe src='multi-game over.html'></iframe></div><div class='iframe-container'><iframe src='multi-beginning of ruin.html'></iframe></div><!-- PASTE HERE --> 
+</div>
+
+<script type="text/javascript">
+
+
+
+var iframes = document.getElementsByTagName("iframe");
+
+/*
+ * This function is triggered whenever there's an input
+ * on the page.
+ * 
+ * It creates a message to post to every iframes
+ * This message is a cloned KeyboardEvent
+ */
+
+function triggerControl(e) {
+
+let clonedEvent = {
+type: e.type,
+key: e.key,
+keyCode: e.keyCode,
+code: e.code,
+which: e.which
+};
+
+for (const iframe of iframes) {
+iframe.contentWindow.postMessage(clonedEvent, "*");
+}
+}
+
+
+
+</script>
+
+<script type="text/javascript" src="screensize.js"></script>
+</body>
+</html>
